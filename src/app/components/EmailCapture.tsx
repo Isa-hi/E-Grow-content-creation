@@ -20,7 +20,7 @@ export default function EmailCapture() {
       setMessage("¡Gracias por suscribirte! Revisa tu correo para más información.")
       setEmail("")
     } catch (error) {
-      setMessage("Hubo un error al procesar tu solicitud. Por favor, intenta de nuevo.")
+      setMessage(`Hubo un error al suscribirte: ${error}`)
     } finally {
       setIsLoading(false)
     }
