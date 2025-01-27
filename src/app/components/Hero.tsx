@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+import EmailCaptureButton from "./ui/EmailCaptureButton";
 
 export default function Hero() {
   return (
@@ -15,10 +16,7 @@ export default function Hero() {
           <p className="text-xl mb-8 text-gray-200">
             Aún si nunca has editado un video, con E-Grow puedes crear contenido que se comparte y se ve profesional.
           </p>
-          <button className="bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold py-3 px-6 rounded-full hover:from-purple-600 hover:to-pink-600 transition-all duration-300 flex items-center">
-            Accede a tus recursos gratuitos
-            <ArrowRight className="ml-2" />
-          </button>
+          <EmailCaptureButton />
         </div>
         <div className="md:w-1/2">
           <div className="rounded-lg overflow-hidden shadow-2xl border border-gray-700">

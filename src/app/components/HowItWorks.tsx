@@ -1,4 +1,5 @@
 import { UserPlus, Download, Video } from "lucide-react";
+import EmailCaptureButton from "./ui/EmailCaptureButton";
 
 export default function HowItWorks() {
   return (
@@ -52,6 +53,7 @@ export default function HowItWorks() {
           </div>
         </div>
       </div>
+      <EmailCaptureButton text="Obten acceso GRATIS a los recursos" center />
     </section>
   );
 }

@@ -1,22 +1,13 @@
-import Link from "next/link"
+import Link from "next/link";
 
 export default function Header() {
   return (
-    <header className="bg-gray-950 shadow-md">
-      <nav className="container mx-auto px-6 py-4 flex justify-between items-center">
-        <Link href="/" className="text-2xl font-bold gradient-text">
-          E-GROW
-        </Link>
-        <div className="space-x-4">
-          <Link href="#" className="text-gray-300 hover:text-white transition-colors">
-            Acerca de
-          </Link>
-          <Link href="#" className="text-gray-300 hover:text-white transition-colors">
-            Contacto
-          </Link>
-        </div>
-      </nav>
+    <header className="sticky top-0 z-50 w-full text-white text-center py-3 px-4 bg-gradient-to-r from-orange-500 via-red-600 to-pink-500 shadow-lg">
+      <Link href="#email-capture">
+        <h2 className="text-lg md:text-xl font-bold animate-pulse">
+          🔥 ¡Oferta Exclusiva de Lanzamiento! 🔥
+        </h2>
+      </Link>
     </header>
-  )
+  );
 }
-

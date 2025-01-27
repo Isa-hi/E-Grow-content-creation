@@ -38,11 +38,6 @@ export default function Freebies() {
             </div>
           </div>
         </div>
-        <div className="text-center">
-          <button className="bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold py-3 px-8 rounded-full hover:from-purple-600 hover:to-pink-600 transition-all duration-300">
-            Descarga tus freebies ahora
-          </button>
-        </div>
       </div>
     </section>
   )
