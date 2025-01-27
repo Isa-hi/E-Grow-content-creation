@@ -1,51 +1,30 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { ArrowRight } from "lucide-react";
+import { useEffect, useRef } from "react";
 
 export default function EmailCapture() {
-  const [email, setEmail] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [message, setMessage] = useState("");
+  const iframeRef = useRef<HTMLIFrameElement | null>(null);
 
-  // Cargar el script de Kajabi
   useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://decibel.mykajabi.com/forms/2148934872/embed.js";
-    script.async = true;
-    document.body.appendChild(script);
-
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setMessage("");
-
-    try {
-      // Usar el script de Kajabi para enviar el email
-      // Aquí se usa un identificador específico del formulario de Kajabi
-      const form = document.querySelector("form[data-form-id='2148934872']");
-
-      if (form) {
-        const input = form.querySelector("input[name='email']");
-        if (input) {
-          (input as HTMLInputElement).value = email;
-          form.dispatchEvent(new Event("submit", { bubbles: true }));
-        }
+    if (iframeRef.current) {
+      const iframeDoc = iframeRef.current.contentDocument;
+      if (iframeDoc) {
+        iframeDoc.open();
+        iframeDoc.write(`
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <script src="https://decibel.mykajabi.com/forms/2148934872/embed.js"></script>
+          </head>
+          <body></body>
+          </html>
+        `);
+        iframeDoc.close();
       }
-
-      setMessage("¡Gracias por suscribirte! Revisa tu correo para más información.");
-      setEmail("");
-    } catch (error) {
-      setMessage(`Hubo un error al procesar tu suscripción: ${error}`);
-    } finally {
-      setIsLoading(false);
     }
-  };
+  }, []);
 
   return (
     <section className="py-20 bg-gray-950">
@@ -56,35 +35,12 @@ export default function EmailCapture() {
         <p className="text-xl text-center text-gray-300 mb-8 md:w-3/4 mx-auto">
           Suscríbete y recibe acceso inmediato a recursos gratuitos para crear contenido viral y lleva tu presencia online al siguiente nivel
         </p>
-        <form onSubmit={handleSubmit} className="max-w-md mx-auto" data-form-id="2148934872">
-          <div className="flex items-center border-b border-purple-500 py-2">
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Tu correo electrónico"
-              required
-              className="appearance-none bg-transparent border-none w-full text-white mr-3 py-1 px-2 leading-tight focus:outline-none"
-            />
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="flex-shrink-0 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 border-purple-500 hover:border-purple-700 text-sm border-4 text-white py-1 px-2 rounded-full transition-all duration-300 flex items-center"
-            >
-              {isLoading ? (
-                "Enviando..."
-              ) : (
-                <>
-                  Suscribirse
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </>
-              )}
-            </button>
-          </div>
-        </form>
-        {message && (
-          <p className="mt-4 text-center text-sm text-gray-300">{message}</p>
-        )}
+        {/* Contenedor iframe para el script */}
+        <iframe
+          ref={iframeRef}
+          className="w-full h-[480px] border-0"
+          style={{ backgroundColor: "transparent" }}
+        />
       </div>
     </section>
   );
