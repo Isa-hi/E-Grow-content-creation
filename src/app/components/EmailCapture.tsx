@@ -1,39 +1,62 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { ArrowRight } from "lucide-react"
+import { useEffect, useState } from "react";
+import { ArrowRight } from "lucide-react";
 
 export default function EmailCapture() {
-  const [email, setEmail] = useState("")
-  const [isLoading, setIsLoading] = useState(false)
-  const [message, setMessage] = useState("")
+  const [email, setEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState("");
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setIsLoading(true)
-    setMessage("")
+  // Cargar el script de Kajabi
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://decibel.mykajabi.com/forms/2148934872/embed.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setMessage("");
 
     try {
-      // Aquí iría la lógica para conectar con Kajabi
-      // Por ahora, simularemos una conexión exitosa
-      await new Promise((resolve) => setTimeout(resolve, 1000))
-      setMessage("¡Gracias por suscribirte! Revisa tu correo para más información.")
-      setEmail("")
+      // Usar el script de Kajabi para enviar el email
+      // Aquí se usa un identificador específico del formulario de Kajabi
+      const form = document.querySelector("form[data-form-id='2148934872']");
+
+      if (form) {
+        const input = form.querySelector("input[name='email']");
+        if (input) {
+          (input as HTMLInputElement).value = email;
+          form.dispatchEvent(new Event("submit", { bubbles: true }));
+        }
+      }
+
+      setMessage("¡Gracias por suscribirte! Revisa tu correo para más información.");
+      setEmail("");
     } catch (error) {
-      setMessage(`Hubo un error al suscribirte: ${error}`)
+      setMessage(`Hubo un error al procesar tu suscripción: ${error}`);
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   return (
     <section className="py-20 bg-gray-950">
       <div className="container mx-auto px-6">
-        <h2 className="text-3xl font-bold text-center mb-8 gradient-text">¡Tu camino hacia videos virales comienza aquí!</h2>
+        <h2 className="text-3xl font-bold text-center mb-8 gradient-text">
+          ¡Tu camino hacia videos virales comienza aquí!
+        </h2>
         <p className="text-xl text-center text-gray-300 mb-8 md:w-3/4 mx-auto">
-        Suscríbete y recibe acceso inmediato a recursos gratuitos para crear contenido viral y lleva tu presencia online al siguiente nivel
+          Suscríbete y recibe acceso inmediato a recursos gratuitos para crear contenido viral y lleva tu presencia online al siguiente nivel
         </p>
-        <form onSubmit={handleSubmit} className="max-w-md mx-auto">
+        <form onSubmit={handleSubmit} className="max-w-md mx-auto" data-form-id="2148934872">
           <div className="flex items-center border-b border-purple-500 py-2">
             <input
               type="email"
@@ -59,9 +82,10 @@ export default function EmailCapture() {
             </button>
           </div>
         </form>
-        {message && <p className="mt-4 text-center text-sm text-gray-300">{message}</p>}
+        {message && (
+          <p className="mt-4 text-center text-sm text-gray-300">{message}</p>
+        )}
       </div>
     </section>
-  )
+  );
 }
-
