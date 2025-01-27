@@ -1,4 +1,3 @@
-import { ArrowRight } from "lucide-react";
 import EmailCaptureButton from "./ui/EmailCaptureButton";
 
 export default function FinalCTA() {

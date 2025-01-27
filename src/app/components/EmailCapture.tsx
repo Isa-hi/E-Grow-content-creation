@@ -45,7 +45,7 @@ export default function EmailCapture() {
       setEmail("");
       setName("");
     } catch (error) {
-      setMessage("Hubo un error al procesar tu suscripción.");
+      setMessage(`Hubo un error al procesar tu suscripción: ${error}`);
     } finally {
       setIsLoading(false);
     }
