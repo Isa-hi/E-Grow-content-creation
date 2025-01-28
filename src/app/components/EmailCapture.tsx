@@ -67,8 +67,8 @@ export default function EmailCapture() {
         <h2 className="text-4xl sm:text-5xl font-bold text-center mb-8 text-white">
           ¡Tu camino hacia videos virales comienza aquí!
         </h2>
-        <p className="text-xl text-center text-gray-300 mb-8 md:w-3/4 mx-auto">
-          Suscríbete y recibe acceso inmediato a recursos gratuitos para crear
+        <p className="text-xl text-center text-gray-200 mb-8 md:w-3/4 mx-auto">
+          Suscríbete y recibe acceso GRATIS e inmediato a recursos para crear
           contenido viral y lleva tu presencia online al siguiente nivel
         </p>
         <form
@@ -77,7 +77,7 @@ export default function EmailCapture() {
           data-form-id="2148934872"
         >
           <fieldset>
-            <div className="text-field kajabi-form__form-item">
+            <div className="text-field kajabi-form__form-item border border-pink-300 p-3 rounded-lg">
               <input
                 type="text"
                 name="form_submission[name]"
@@ -89,7 +89,7 @@ export default function EmailCapture() {
                 className="appearance-none bg-transparent border-none w-full text-white leading-tight text-xl focus:outline-none"
               />
             </div>
-            <div className="email-field kajabi-form__form-item mt-4">
+            <div className="email-field kajabi-form__form-item mt-4 border border-pink-300 p-3 rounded-lg">
               <input
                 type="email"
                 name="form_submission[email]"
@@ -103,10 +103,10 @@ export default function EmailCapture() {
             </div>
             <button
               type="submit"
-              className="kajabi-form__btn kajabi-form__btn--block-mobile mt-6 bg-gradient-to-r from-indigo-500 to-blue-500 hover:from-indigo-600 hover:to-green-600 border-indigo-500 hover:border-indigo-500 text-sm border-4 text-white py-1 px-2 rounded-full transition-all duration-300 flex items-center"
+              className="kajabi-form__btn kajabi-form__btn--block-mobile mt-6 bg-gradient-to-r from-pink-500 to-blue-500 hover:from-indigo-600 hover:to-green-60 hover:border-indigo-500 text-sm border-4 text-white py-2 px-6 rounded-full transition-all duration-300 flex items-center mx-auto"
               disabled={isLoading}
             >
-              {isLoading ? "Enviando..." : "¡Obtener acceso!"}
+              {isLoading ? "Enviando..." : "¡Obtener acceso gratis!"}
             </button>
           </fieldset>
         </form>

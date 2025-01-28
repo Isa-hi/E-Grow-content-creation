@@ -5,6 +5,7 @@ import Freebies from "./components/Freebies";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import HowItWorks from "./components/HowItWorks";
+import { LowTicketProductDisplay } from "./components/LowTicketProductDisplay";
 import Testimonials from "./components/Testimonials";
 import ValueProposition from "./components/ValueProposition";
 
@@ -17,6 +18,7 @@ export default function Home() {
       <HowItWorks />
       <Testimonials />
       <Freebies />
+      <LowTicketProductDisplay />
       <EmailCapture />
       <FinalCTA />
       <Footer />
