@@ -53,7 +53,7 @@ export default function EmailCapture() {
       }
     } catch (error) {
       setMessage(
-        "Hubo un error desconocido al procesar tu suscripción. Inténtalo de nuevo más tarde."
+        `Hubo un error desconocido al procesar tu suscripción. Inténtalo de nuevo más tarde. ${error}`
       );
     } finally {
       setIsLoading(false);
