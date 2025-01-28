@@ -36,11 +36,16 @@ export default function EmailCapture() {
       const form = document.querySelector("form[data-form-id='2148934872']");
 
       if (form) {
+        console.log("Formulario encontrado:", form);
         const emailInput = form.querySelector("input[name='email']");
         const nameInput = form.querySelector("input[name='name']"); // New name input
         if (emailInput && nameInput) {
           (emailInput as HTMLInputElement).value = email;
           (nameInput as HTMLInputElement).value = name; // Set name value
+
+          // Log the data being sent
+          console.log("Sending data to Kajabi:", { name, email });
+
           form.dispatchEvent(new Event("submit", { bubbles: true }));
         }
       }
@@ -75,6 +80,7 @@ export default function EmailCapture() {
             <div className="flex items-center border-4 border-purple-500 py-2 px-5 rounded-3xl">
               <input
                 type="text"
+                name="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Tu nombre"
@@ -85,6 +91,7 @@ export default function EmailCapture() {
             <div className="flex items-center border-4 mt-5 border-purple-500 p-3 rounded-3xl">
               <input
                 type="email"
+                name="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Tu email"
