@@ -41,8 +41,8 @@ export default function EmailCapture() {
 
       if (form) {
         // Actualizar inputs con los valores actuales
-        const emailInput = form.querySelector("input[name='email']");
-        const nameInput = form.querySelector("input[name='name']");
+        const emailInput = form.querySelector("input[name='form_submission[name]']");
+        const nameInput = form.querySelector("input[name='form_submission[email]']");
 
         if (emailInput && nameInput) {
           (emailInput as HTMLInputElement).value = email;
@@ -53,7 +53,7 @@ export default function EmailCapture() {
           // Simular el envío del formulario para que lo procese el script de Kajabi
           setTimeout(() => {
             form.submit(); // Esto permite que el script gestione los datos correctamente
-          }, 1000);
+          }, 2000);
         } else {
           throw new Error("No se encontraron los inputs en el formulario.");
         }
@@ -107,7 +107,7 @@ export default function EmailCapture() {
             <div className="flex items-center border-4 border-purple-500 py-2 px-5 rounded-3xl">
               <input
                 type="text"
-                name="name"
+                name="form_submission[name]"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Tu nombre"
@@ -118,7 +118,7 @@ export default function EmailCapture() {
             <div className="flex items-center border-4 mt-5 border-purple-500 p-3 rounded-3xl">
               <input
                 type="email"
-                name="email"
+                name="form_submission[email]"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Tu email"
