@@ -28,7 +28,7 @@ export default function EmailCapture() {
     setMessage("");
 
     try {
-      const response = await fetch(
+      await fetch(
         "https://decibel.mykajabi.com/forms/2148934872/form_submissions",
         {
           method: "POST",
@@ -85,7 +85,7 @@ export default function EmailCapture() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
-                placeholder="Name"
+                placeholder="Tu Nombre"
                 className="appearance-none bg-transparent border-none w-full text-white leading-tight text-xl focus:outline-none"
               />
             </div>
@@ -97,7 +97,7 @@ export default function EmailCapture() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                placeholder="Email"
+                placeholder="Tu Email"
                 className="appearance-none bg-transparent border-none w-full text-white leading-tight text-xl focus:outline-none"
               />
             </div>

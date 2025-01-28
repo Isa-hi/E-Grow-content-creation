@@ -19,13 +19,16 @@ export default function Hero() {
         </div>
         <div className="md:w-1/2">
           <div className="rounded-lg overflow-hidden shadow-2xl border border-gray-700">
-            <video autoPlay loop muted className="w-full">
-              <source
-                src="/placeholder.svg?height=400&width=600"
-                type="video/mp4"
-              />
-              Tu navegador no soporta el tag de video.
-            </video>
+            <iframe
+              width="100%"
+              height="315"
+              src="https://www.youtube.com/embed/BD_Ak8xS-D4"
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="w-full border-0 rounded-xl"
+            ></iframe>
           </div>
         </div>
       </div>

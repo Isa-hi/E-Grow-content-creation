@@ -14,7 +14,7 @@ export default function Testimonials() {
               </p>
               <div className="flex items-center">
                 <Image
-                  src="/placeholder.svg?height=50&width=50"
+                  src="/profile-pictures/profile1.png"
                   alt="Carlos G."
                   width={50}
                   height={50}
@@ -38,7 +38,7 @@ export default function Testimonials() {
               </p>
               <div className="flex items-center">
                 <Image
-                  src="/placeholder.svg?height=50&width=50"
+                  src="/profile-pictures/profile2.png"
                   alt="Sofía R."
                   width={50}
                   height={50}
