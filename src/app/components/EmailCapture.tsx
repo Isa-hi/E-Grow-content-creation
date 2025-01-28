@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ArrowRight } from "lucide-react";
 
 export default function EmailCapture() {
   const [name, setName] = useState("");
