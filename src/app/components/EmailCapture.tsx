@@ -66,8 +66,12 @@ export default function EmailCapture() {
       );
       setEmail("");
       setName("");
-    } catch (error: any) {
-      setMessage(`Hubo un error al procesar tu suscripción: ${error.message}`);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setMessage(`Hubo un error al procesar tu suscripción: ${error.message}`);
+      } else {
+        setMessage("Hubo un error desconocido al procesar tu suscripción.");
+      }
     } finally {
       setIsLoading(false);
     }
