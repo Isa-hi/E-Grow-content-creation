@@ -13,17 +13,20 @@ export default function EmailCapture() {
 
   // Cargar el script de Kajabi
   useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://decibel.mykajabi.com/forms/2148934872/embed.js";
-    script.async = true;
-    script.onload = () => setIsKajabiLoaded(true);
-    script.onerror = () => setKajabiError("Error al cargar el script de Kajabi.");
-    document.body.appendChild(script);
+    if (!isKajabiLoaded) {
+      const script = document.createElement("script");
+      script.src = "https://decibel.mykajabi.com/forms/2148934872/embed.js";
+      script.async = true;
+      script.onload = () => setIsKajabiLoaded(true);
+      script.onerror = () =>
+        setKajabiError("Error al cargar el script de Kajabi.");
+      document.body.appendChild(script);
 
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
+      return () => {
+        document.body.removeChild(script);
+      };
+    }
+  }, [isKajabiLoaded]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -32,51 +35,71 @@ export default function EmailCapture() {
 
     try {
       // Usar el script de Kajabi para enviar el email
-      // Aquí se usa un identificador específico del formulario de Kajabi
-      const form = document.querySelector("form[data-form-id='2148934872']");
+      const form = document.querySelector(
+        "form[data-form-id='2148934872']"
+      ) as HTMLFormElement;
 
       if (form) {
-        console.log("Formulario encontrado:", form);
+        // Actualizar inputs con los valores actuales
         const emailInput = form.querySelector("input[name='email']");
-        const nameInput = form.querySelector("input[name='name']"); // New name input
+        const nameInput = form.querySelector("input[name='name']");
+
         if (emailInput && nameInput) {
           (emailInput as HTMLInputElement).value = email;
-          (nameInput as HTMLInputElement).value = name; // Set name value
+          (nameInput as HTMLInputElement).value = name;
 
-          // Log the data being sent
-          console.log("Sending data to Kajabi:", { name, email });
+          console.log("Datos enviados a Kajabi:", { name, email });
 
-          form.dispatchEvent(new Event("submit", { bubbles: true }));
+          // Simular el envío del formulario para que lo procese el script de Kajabi
+          setTimeout(() => {
+            form.submit(); // Esto permite que el script gestione los datos correctamente
+          }, 1000);
+        } else {
+          throw new Error("No se encontraron los inputs en el formulario.");
         }
+      } else {
+        throw new Error("El formulario de Kajabi no se cargó correctamente.");
       }
 
-      setMessage("¡Gracias por suscribirte! Revisa tu correo para más información.");
+      setMessage(
+        "¡Gracias por suscribirte! Revisa tu correo para más información."
+      );
       setEmail("");
       setName("");
-    } catch (error) {
-      setMessage(`Hubo un error al procesar tu suscripción: ${error}`);
+    } catch (error: any) {
+      setMessage(`Hubo un error al procesar tu suscripción: ${error.message}`);
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <section id="email-capture" className="py-20  bg-gradient-to-r from-purple-900 to-pink-900">
+    <section
+      id="email-capture"
+      className="py-20 bg-gradient-to-r from-purple-900 to-pink-900"
+    >
       <div className="container mx-auto px-6">
         <h2 className="text-4xl sm:text-5xl font-bold text-center mb-8 text-white">
           ¡Tu camino hacia videos virales comienza aquí!
         </h2>
         <p className="text-xl text-center text-gray-300 mb-8 md:w-3/4 mx-auto">
-          Suscríbete y recibe acceso inmediato a recursos gratuitos para crear contenido viral y lleva tu presencia online al siguiente nivel
+          Suscríbete y recibe acceso inmediato a recursos gratuitos para crear
+          contenido viral y lleva tu presencia online al siguiente nivel
         </p>
         {!isKajabiLoaded && !kajabiError && (
-          <p className="text-center text-sm text-gray-300">Cargando formulario...</p>
+          <p className="text-center text-sm text-gray-300">
+            Cargando formulario...
+          </p>
         )}
         {kajabiError && (
           <p className="text-center text-sm text-red-500">{kajabiError}</p>
         )}
         {isKajabiLoaded && (
-          <form onSubmit={handleSubmit} className="max-w-md mx-auto" data-form-id="2148934872">
+          <form
+            onSubmit={handleSubmit}
+            className="max-w-md mx-auto"
+            data-form-id="2148934872"
+          >
             <div className="flex items-center border-4 border-purple-500 py-2 px-5 rounded-3xl">
               <input
                 type="text"
