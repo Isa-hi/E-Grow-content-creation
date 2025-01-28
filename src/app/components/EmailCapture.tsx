@@ -41,8 +41,12 @@ export default function EmailCapture() {
 
       if (form) {
         // Actualizar inputs con los valores actuales
-        const emailInput = form.querySelector("input[name='form_submission[name]']");
-        const nameInput = form.querySelector("input[name='form_submission[email]']");
+        const emailInput = form.querySelector(
+          "input[name='form_submission[name]']"
+        );
+        const nameInput = form.querySelector(
+          "input[name='form_submission[email]']"
+        );
 
         if (emailInput && nameInput) {
           (emailInput as HTMLInputElement).value = email;
@@ -53,7 +57,7 @@ export default function EmailCapture() {
           // Simular el envío del formulario para que lo procese el script de Kajabi
           setTimeout(() => {
             form.submit(); // Esto permite que el script gestione los datos correctamente
-          }, 2000);
+          }, 1000);
         } else {
           throw new Error("No se encontraron los inputs en el formulario.");
         }
@@ -68,7 +72,9 @@ export default function EmailCapture() {
       setName("");
     } catch (error: unknown) {
       if (error instanceof Error) {
-        setMessage(`Hubo un error al procesar tu suscripción: ${error.message}`);
+        setMessage(
+          `Hubo un error al procesar tu suscripción: ${error.message}`
+        );
       } else {
         setMessage("Hubo un error desconocido al procesar tu suscripción.");
       }
@@ -104,42 +110,39 @@ export default function EmailCapture() {
             className="max-w-md mx-auto"
             data-form-id="2148934872"
           >
-            <div className="flex items-center border-4 border-purple-500 py-2 px-5 rounded-3xl">
-              <input
-                type="text"
-                name="form_submission[name]"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Tu nombre"
-                required
-                className="appearance-none bg-transparent border-none w-full text-white leading-tight text-xl focus:outline-none"
-              />
-            </div>
-            <div className="flex items-center border-4 mt-5 border-purple-500 p-3 rounded-3xl">
-              <input
-                type="email"
-                name="form_submission[email]"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Tu email"
-                required
-                className="appearance-none bg-transparent border-none w-full text-white leading-tight text-xl focus:outline-none"
-              />
+            <fieldset>
+              <div className="text-field kajabi-form__form-item">
+                <input
+                  type="text"
+                  name="form_submission[name]"
+                  id="form_submission_name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                  placeholder="Name"
+                  className="appearance-none bg-transparent border-none w-full text-white leading-tight text-xl focus:outline-none"
+                />
+              </div>
+              <div className="email-field kajabi-form__form-item mt-4">
+                <input
+                  type="email"
+                  name="form_submission[email]"
+                  id="form_submission_email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  placeholder="Email"
+                  className="appearance-none bg-transparent border-none w-full text-white leading-tight text-xl focus:outline-none"
+                />
+              </div>
               <button
                 type="submit"
+                className="kajabi-form__btn kajabi-form__btn--block-mobile mt-6 bg-gradient-to-r from-indigo-500 to-blue-500 hover:from-indigo-600 hover:to-green-600 border-indigo-500 hover:border-indigo-500 text-sm border-4 text-white py-1 px-2 rounded-full transition-all duration-300 flex items-center"
                 disabled={isLoading}
-                className="flex-shrink-0 bg-gradient-to-r from-indigo-500 to-blue-500 hover:from-indigo-600 hover:to-green-600 border-indigo-500 hover:border-indigo-500 text-sm border-4 text-white py-1 px-2 rounded-full transition-all duration-300 flex items-center"
               >
-                {isLoading ? (
-                  "Enviando..."
-                ) : (
-                  <>
-                    Suscribirse
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </>
-                )}
+                {isLoading ? "Enviando..." : "¡Obtener acceso!"}
               </button>
-            </div>
+            </fieldset>
           </form>
         )}
         {message && (
