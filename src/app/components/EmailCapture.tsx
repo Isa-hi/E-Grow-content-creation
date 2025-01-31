@@ -29,7 +29,7 @@ export default function EmailCapture() {
 
     try {
       await fetch(
-        "https://decibel.mykajabi.com/forms/2148934872/form_submissions",
+        "https://egrow.mykajabi.com/forms/2148934872/form_submissions",
         {
           method: "POST",
           mode: "no-cors", // Added to bypass CORS policy
