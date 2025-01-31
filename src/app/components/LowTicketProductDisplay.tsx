@@ -62,7 +62,7 @@ export function LowTicketProductDisplay() {
             <p className="text-xl font-bold text-gray-900 mb-6 inline-block bg-yellow-200 px-4 py-2 rounded-xl">
               🔓 Desbloquea Todo por Solo $1 👇
             </p>
-            <Link href={"https://decibel.mykajabi.com/offers/F4c7YUAC"} className="bg-gradient-to-r text-sm from-pink-500 to-amber-500 hover:from-yellow-600 hover:to-amber-600 text-white font-bold sm:py-4 sm:px-8 rounded-full sm:text-xl shadow-lg transform transition duration-300 ease-in-out hover:scale-105 flex items-center justify-center max-w-full text-wrap mx-auto">
+            <Link href={"https://egrow.mykajabi.com/offers/F4c7YUAC"} className="bg-gradient-to-r text-sm from-pink-500 to-amber-500 hover:from-yellow-600 hover:to-amber-600 text-white font-bold sm:py-4 sm:px-8 rounded-full sm:text-xl shadow-lg transform transition duration-300 ease-in-out hover:scale-105 flex items-center justify-center max-w-full text-wrap mx-auto">
               <Sparkles className="sm:mr-2" />
               Acceder al Contenido Premium
             </Link>
